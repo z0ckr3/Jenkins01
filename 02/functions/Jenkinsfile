@@ -1,45 +1,44 @@
-@Library('JenkinsLibs')
+@Library('JenkinsLibs') _
 pipeline {
     agent any
 
-    environment{
+    environment {
         dockerhub = credentials('DockerHub')
     }
 
-    stages{
-        stage('Docker Build'){
-            steps{
-                script{
-                    dockerLib.build(DockerfilePath: "01/Dockerfile",
+    stages {
+        stage('Docker Build') {
+            steps {
+                script {
+                    dockerLib.build(DockerfilePath: '01/Dockerfile',
                                     DockerImage: "z0ckr3/homer-page:1.0.0-${BUILD_ID}",
-                                    DockerContext: "01")
+                                    DockerContext: '01')
                 }
             }
         }
 
-        stage('Docker Login'){
-            steps{
-                script{
+        stage('Docker Login') {
+            steps {
+                script {
                     dockerLib.login(DockerUser: "$dockerhub_USR",
                                     DockerPass: "$dockerhub_PSW")
                 }
             }
         }
 
-        stage('Docker Push'){
-            steps{
+        stage('Docker Push') {
+            steps {
                 script {
                     dockerLib.push(DockerImage: "z0ckr3/homer-page:1.0.0-${BUILD_ID}")
                 }
             }
         }
 
-        stage('Docker Logout'){
-            steps{
+        stage('Docker Logout') {
+            steps {
                 script {
                     dockerLib.logout()
                 }
-
             }
         }
     }
