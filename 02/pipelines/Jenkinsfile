@@ -1,0 +1,6 @@
+@Library('JenkinsLibs') _
+dockerPipeline(
+    dockerfilePath: '01/Dockerfile',
+    dockerImage: "z0ckr3/homer-page:1.0.0-${BUILD_ID}",
+    dockerContext: '01'
+)
