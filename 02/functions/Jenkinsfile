@@ -1,5 +1,5 @@
 @Library('JenkinsLibs')
-pipeline{
+pipeline {
     agent any
 
     environment{
