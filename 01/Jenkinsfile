@@ -19,7 +19,7 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
-                    sh "docker push z0ckr3/homer_page:1.0.0-${BUILD_ID}"
+                    sh "docker push z0ckr3/homer-page:1.0.0-${BUILD_ID}"
                 }
             }
         }
