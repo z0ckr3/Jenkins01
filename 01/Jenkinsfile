@@ -7,7 +7,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    sh "docker build -f 01/Dockerfile -t z0ckr3/homer-page:1.0.0-${BUILD_ID} 01"
+                    sh "docker build -f 01/Dockerfile -t z0ckr3/homer-page:1.0.0-${BUILD_ID} --no-cache 01"
                 }
             }
         }
