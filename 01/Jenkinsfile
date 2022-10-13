@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    environment {
+        dockerhub = credentials('DockerHub')
+    }
+    stages {
+        stage('docker build') {
+            steps {
+                script {
+                    sh "docker build -f 01/Dockerfile -t z0ckr3/homer-page:1.0.0-${BUILD_ID} 01"
+                }
+            }
+        }
+        stage('docker push') {
+            steps {
+                script {
+                    sh "echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin"
+                    sh "docker push z0ckr3/homer_page:1.0.0-${BUILD_ID}"
+                }
+            }
+        }
+    }
+}
